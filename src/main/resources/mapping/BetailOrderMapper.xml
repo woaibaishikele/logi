@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.BetailOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.BetailOrder" >
+    <id column="dorders_no" property="dordersNo" jdbcType="VARCHAR" />
+    <result column="dorders_number" property="dordersNumber" jdbcType="INTEGER" />
+    <result column="dorders_mode" property="dordersMode" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="dorders_inspection" property="dordersInspection" jdbcType="INTEGER" />
+    <result column="dorders_address" property="dordersAddress" jdbcType="VARCHAR" />
+    <result column="dorders_user" property="dordersUser" jdbcType="VARCHAR" />
+    <result column="payable_user" property="payableUser" jdbcType="VARCHAR" />
+    <result column="order_phone" property="orderPhone" jdbcType="VARCHAR" />
+    <result column="logistics_id" property="logisticsId" jdbcType="INTEGER" />
+    <result column="Logisticsprice_tprice" property="logisticspriceTprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dorders_no, dorders_number, dorders_mode, order_state, dorders_inspection, dorders_address, 
+    dorders_user, payable_user, order_phone, logistics_id, Logisticsprice_tprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from detail_order
+    where dorders_no = #{dordersNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from detail_order
+    where dorders_no = #{dordersNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.BetailOrder" >
+    insert into detail_order (dorders_no, dorders_number, dorders_mode, 
+      order_state, dorders_inspection, dorders_address, 
+      dorders_user, payable_user, order_phone, 
+      logistics_id, Logisticsprice_tprice)
+    values (#{dordersNo,jdbcType=VARCHAR}, #{dordersNumber,jdbcType=INTEGER}, #{dordersMode,jdbcType=INTEGER}, 
+      #{orderState,jdbcType=INTEGER}, #{dordersInspection,jdbcType=INTEGER}, #{dordersAddress,jdbcType=VARCHAR}, 
+      #{dordersUser,jdbcType=VARCHAR}, #{payableUser,jdbcType=VARCHAR}, #{orderPhone,jdbcType=VARCHAR}, 
+      #{logisticsId,jdbcType=INTEGER}, #{logisticspriceTprice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.BetailOrder" >
+    insert into detail_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dordersNo != null" >
+        dorders_no,
+      </if>
+      <if test="dordersNumber != null" >
+        dorders_number,
+      </if>
+      <if test="dordersMode != null" >
+        dorders_mode,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="dordersInspection != null" >
+        dorders_inspection,
+      </if>
+      <if test="dordersAddress != null" >
+        dorders_address,
+      </if>
+      <if test="dordersUser != null" >
+        dorders_user,
+      </if>
+      <if test="payableUser != null" >
+        payable_user,
+      </if>
+      <if test="orderPhone != null" >
+        order_phone,
+      </if>
+      <if test="logisticsId != null" >
+        logistics_id,
+      </if>
+      <if test="logisticspriceTprice != null" >
+        Logisticsprice_tprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dordersNo != null" >
+        #{dordersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dordersNumber != null" >
+        #{dordersNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dordersMode != null" >
+        #{dordersMode,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="dordersInspection != null" >
+        #{dordersInspection,jdbcType=INTEGER},
+      </if>
+      <if test="dordersAddress != null" >
+        #{dordersAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dordersUser != null" >
+        #{dordersUser,jdbcType=VARCHAR},
+      </if>
+      <if test="payableUser != null" >
+        #{payableUser,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null" >
+        #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsId != null" >
+        #{logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticspriceTprice != null" >
+        #{logisticspriceTprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.BetailOrder" >
+    update detail_order
+    <set >
+      <if test="dordersNumber != null" >
+        dorders_number = #{dordersNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dordersMode != null" >
+        dorders_mode = #{dordersMode,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="dordersInspection != null" >
+        dorders_inspection = #{dordersInspection,jdbcType=INTEGER},
+      </if>
+      <if test="dordersAddress != null" >
+        dorders_address = #{dordersAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dordersUser != null" >
+        dorders_user = #{dordersUser,jdbcType=VARCHAR},
+      </if>
+      <if test="payableUser != null" >
+        payable_user = #{payableUser,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null" >
+        order_phone = #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsId != null" >
+        logistics_id = #{logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticspriceTprice != null" >
+        Logisticsprice_tprice = #{logisticspriceTprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where dorders_no = #{dordersNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.BetailOrder" >
+    update detail_order
+    set dorders_number = #{dordersNumber,jdbcType=INTEGER},
+      dorders_mode = #{dordersMode,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=INTEGER},
+      dorders_inspection = #{dordersInspection,jdbcType=INTEGER},
+      dorders_address = #{dordersAddress,jdbcType=VARCHAR},
+      dorders_user = #{dordersUser,jdbcType=VARCHAR},
+      payable_user = #{payableUser,jdbcType=VARCHAR},
+      order_phone = #{orderPhone,jdbcType=VARCHAR},
+      logistics_id = #{logisticsId,jdbcType=INTEGER},
+      Logisticsprice_tprice = #{logisticspriceTprice,jdbcType=DECIMAL}
+    where dorders_no = #{dordersNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

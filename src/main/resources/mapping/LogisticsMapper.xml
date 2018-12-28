@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.LogisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Logistics" >
+    <id column="logistics_id" property="logisticsId" jdbcType="INTEGER" />
+    <result column="logisticss_odd" property="logisticssOdd" jdbcType="VARCHAR" />
+    <result column="Driver_ID" property="driverId" jdbcType="INTEGER" />
+    <result column="logistice_initialaddress" property="logisticeInitialaddress" jdbcType="VARCHAR" />
+    <result column="logistice_relayaddress" property="logisticeRelayaddress" jdbcType="VARCHAR" />
+    <result column="logistice_targetaddress" property="logisticeTargetaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.model.Logistics" extends="BaseResultMap" >
+    <result column="Driver_phone" property="driverPhone" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    logistics_id, logisticss_odd, Driver_ID, logistice_initialaddress, logistice_relayaddress, 
+    logistice_targetaddress
+  </sql>
+  <sql id="Blob_Column_List" >
+    Driver_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logistics
+    where logistics_id = #{logisticsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from logistics
+    where logistics_id = #{logisticsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Logistics" >
+    insert into logistics (logistics_id, logisticss_odd, Driver_ID, 
+      logistice_initialaddress, logistice_relayaddress, 
+      logistice_targetaddress, Driver_phone)
+    values (#{logisticsId,jdbcType=INTEGER}, #{logisticssOdd,jdbcType=VARCHAR}, #{driverId,jdbcType=INTEGER}, 
+      #{logisticeInitialaddress,jdbcType=VARCHAR}, #{logisticeRelayaddress,jdbcType=VARCHAR}, 
+      #{logisticeTargetaddress,jdbcType=VARCHAR}, #{driverPhone,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Logistics" >
+    insert into logistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logisticsId != null" >
+        logistics_id,
+      </if>
+      <if test="logisticssOdd != null" >
+        logisticss_odd,
+      </if>
+      <if test="driverId != null" >
+        Driver_ID,
+      </if>
+      <if test="logisticeInitialaddress != null" >
+        logistice_initialaddress,
+      </if>
+      <if test="logisticeRelayaddress != null" >
+        logistice_relayaddress,
+      </if>
+      <if test="logisticeTargetaddress != null" >
+        logistice_targetaddress,
+      </if>
+      <if test="driverPhone != null" >
+        Driver_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logisticsId != null" >
+        #{logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticssOdd != null" >
+        #{logisticssOdd,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null" >
+        #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticeInitialaddress != null" >
+        #{logisticeInitialaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticeRelayaddress != null" >
+        #{logisticeRelayaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticeTargetaddress != null" >
+        #{logisticeTargetaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null" >
+        #{driverPhone,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Logistics" >
+    update logistics
+    <set >
+      <if test="logisticssOdd != null" >
+        logisticss_odd = #{logisticssOdd,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null" >
+        Driver_ID = #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticeInitialaddress != null" >
+        logistice_initialaddress = #{logisticeInitialaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticeRelayaddress != null" >
+        logistice_relayaddress = #{logisticeRelayaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticeTargetaddress != null" >
+        logistice_targetaddress = #{logisticeTargetaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null" >
+        Driver_phone = #{driverPhone,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where logistics_id = #{logisticsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.model.Logistics" >
+    update logistics
+    set logisticss_odd = #{logisticssOdd,jdbcType=VARCHAR},
+      Driver_ID = #{driverId,jdbcType=INTEGER},
+      logistice_initialaddress = #{logisticeInitialaddress,jdbcType=VARCHAR},
+      logistice_relayaddress = #{logisticeRelayaddress,jdbcType=VARCHAR},
+      logistice_targetaddress = #{logisticeTargetaddress,jdbcType=VARCHAR},
+      Driver_phone = #{driverPhone,jdbcType=VARBINARY}
+    where logistics_id = #{logisticsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Logistics" >
+    update logistics
+    set logisticss_odd = #{logisticssOdd,jdbcType=VARCHAR},
+      Driver_ID = #{driverId,jdbcType=INTEGER},
+      logistice_initialaddress = #{logisticeInitialaddress,jdbcType=VARCHAR},
+      logistice_relayaddress = #{logisticeRelayaddress,jdbcType=VARCHAR},
+      logistice_targetaddress = #{logisticeTargetaddress,jdbcType=VARCHAR}
+    where logistics_id = #{logisticsId,jdbcType=INTEGER}
+  </update>
+</mapper>

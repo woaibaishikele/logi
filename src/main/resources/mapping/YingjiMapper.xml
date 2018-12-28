@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.YingjiMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Yingji" >
+    <id column="YingJi_name" property="yingjiName" jdbcType="VARCHAR" />
+    <result column="YingJi_phone" property="yingjiPhone" jdbcType="VARCHAR" />
+    <result column="YingJi_jialing" property="yingjiJialing" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    YingJi_name, YingJi_phone, YingJi_jialing
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from yingji
+    where YingJi_name = #{yingjiName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from yingji
+    where YingJi_name = #{yingjiName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Yingji" >
+    insert into yingji (YingJi_name, YingJi_phone, YingJi_jialing
+      )
+    values (#{yingjiName,jdbcType=VARCHAR}, #{yingjiPhone,jdbcType=VARCHAR}, #{yingjiJialing,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Yingji" >
+    insert into yingji
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yingjiName != null" >
+        YingJi_name,
+      </if>
+      <if test="yingjiPhone != null" >
+        YingJi_phone,
+      </if>
+      <if test="yingjiJialing != null" >
+        YingJi_jialing,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yingjiName != null" >
+        #{yingjiName,jdbcType=VARCHAR},
+      </if>
+      <if test="yingjiPhone != null" >
+        #{yingjiPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yingjiJialing != null" >
+        #{yingjiJialing,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Yingji" >
+    update yingji
+    <set >
+      <if test="yingjiPhone != null" >
+        YingJi_phone = #{yingjiPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yingjiJialing != null" >
+        YingJi_jialing = #{yingjiJialing,jdbcType=INTEGER},
+      </if>
+    </set>
+    where YingJi_name = #{yingjiName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Yingji" >
+    update yingji
+    set YingJi_phone = #{yingjiPhone,jdbcType=VARCHAR},
+      YingJi_jialing = #{yingjiJialing,jdbcType=INTEGER}
+    where YingJi_name = #{yingjiName,jdbcType=VARCHAR}
+  </update>
+</mapper>

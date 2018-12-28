@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ObjectbreakageMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Objectbreakage" >
+    <id column="Objectbreakage_id" property="objectbreakageId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_CreateDate" property="orderCreatedate" jdbcType="TIMESTAMP" />
+    <result column="order_paytime" property="orderPaytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.model.Objectbreakage" extends="BaseResultMap" >
+    <result column="order_user" property="orderUser" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Objectbreakage_id, order_id, order_CreateDate, order_paytime
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from objectbreakage
+    where Objectbreakage_id = #{objectbreakageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from objectbreakage
+    where Objectbreakage_id = #{objectbreakageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Objectbreakage" >
+    insert into objectbreakage (Objectbreakage_id, order_id, order_CreateDate, 
+      order_paytime, order_user)
+    values (#{objectbreakageId,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{orderCreatedate,jdbcType=TIMESTAMP}, 
+      #{orderPaytime,jdbcType=TIMESTAMP}, #{orderUser,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Objectbreakage" >
+    insert into objectbreakage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="objectbreakageId != null" >
+        Objectbreakage_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderCreatedate != null" >
+        order_CreateDate,
+      </if>
+      <if test="orderPaytime != null" >
+        order_paytime,
+      </if>
+      <if test="orderUser != null" >
+        order_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="objectbreakageId != null" >
+        #{objectbreakageId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatedate != null" >
+        #{orderCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaytime != null" >
+        #{orderPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderUser != null" >
+        #{orderUser,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Objectbreakage" >
+    update objectbreakage
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatedate != null" >
+        order_CreateDate = #{orderCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaytime != null" >
+        order_paytime = #{orderPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderUser != null" >
+        order_user = #{orderUser,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where Objectbreakage_id = #{objectbreakageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.model.Objectbreakage" >
+    update objectbreakage
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      order_CreateDate = #{orderCreatedate,jdbcType=TIMESTAMP},
+      order_paytime = #{orderPaytime,jdbcType=TIMESTAMP},
+      order_user = #{orderUser,jdbcType=VARBINARY}
+    where Objectbreakage_id = #{objectbreakageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Objectbreakage" >
+    update objectbreakage
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      order_CreateDate = #{orderCreatedate,jdbcType=TIMESTAMP},
+      order_paytime = #{orderPaytime,jdbcType=TIMESTAMP}
+    where Objectbreakage_id = #{objectbreakageId,jdbcType=INTEGER}
+  </update>
+</mapper>

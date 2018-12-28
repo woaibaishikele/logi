@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.DriverMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Driver" >
+    <id column="Driver_ID" property="driverId" jdbcType="INTEGER" />
+    <result column="Driver_name" property="driverName" jdbcType="VARCHAR" />
+    <result column="Driver_Age" property="driverAge" jdbcType="INTEGER" />
+    <result column="Driver_Driverslicense" property="driverDriverslicense" jdbcType="VARCHAR" />
+    <result column="Driver_Drivingage" property="driverDrivingage" jdbcType="INTEGER" />
+    <result column="Driver_phone" property="driverPhone" jdbcType="VARCHAR" />
+    <result column="Driver_Licenseplate" property="driverLicenseplate" jdbcType="VARCHAR" />
+    <result column="Driver_free" property="driverFree" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Driver_ID, Driver_name, Driver_Age, Driver_Driverslicense, Driver_Drivingage, Driver_phone, 
+    Driver_Licenseplate, Driver_free
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from driver
+    where Driver_ID = #{driverId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from driver
+    where Driver_ID = #{driverId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Driver" >
+    insert into driver (Driver_ID, Driver_name, Driver_Age, 
+      Driver_Driverslicense, Driver_Drivingage, 
+      Driver_phone, Driver_Licenseplate, Driver_free
+      )
+    values (#{driverId,jdbcType=INTEGER}, #{driverName,jdbcType=VARCHAR}, #{driverAge,jdbcType=INTEGER}, 
+      #{driverDriverslicense,jdbcType=VARCHAR}, #{driverDrivingage,jdbcType=INTEGER}, 
+      #{driverPhone,jdbcType=VARCHAR}, #{driverLicenseplate,jdbcType=VARCHAR}, #{driverFree,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Driver" >
+    insert into driver
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="driverId != null" >
+        Driver_ID,
+      </if>
+      <if test="driverName != null" >
+        Driver_name,
+      </if>
+      <if test="driverAge != null" >
+        Driver_Age,
+      </if>
+      <if test="driverDriverslicense != null" >
+        Driver_Driverslicense,
+      </if>
+      <if test="driverDrivingage != null" >
+        Driver_Drivingage,
+      </if>
+      <if test="driverPhone != null" >
+        Driver_phone,
+      </if>
+      <if test="driverLicenseplate != null" >
+        Driver_Licenseplate,
+      </if>
+      <if test="driverFree != null" >
+        Driver_free,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="driverId != null" >
+        #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverAge != null" >
+        #{driverAge,jdbcType=INTEGER},
+      </if>
+      <if test="driverDriverslicense != null" >
+        #{driverDriverslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="driverDrivingage != null" >
+        #{driverDrivingage,jdbcType=INTEGER},
+      </if>
+      <if test="driverPhone != null" >
+        #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseplate != null" >
+        #{driverLicenseplate,jdbcType=VARCHAR},
+      </if>
+      <if test="driverFree != null" >
+        #{driverFree,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Driver" >
+    update driver
+    <set >
+      <if test="driverName != null" >
+        Driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverAge != null" >
+        Driver_Age = #{driverAge,jdbcType=INTEGER},
+      </if>
+      <if test="driverDriverslicense != null" >
+        Driver_Driverslicense = #{driverDriverslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="driverDrivingage != null" >
+        Driver_Drivingage = #{driverDrivingage,jdbcType=INTEGER},
+      </if>
+      <if test="driverPhone != null" >
+        Driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseplate != null" >
+        Driver_Licenseplate = #{driverLicenseplate,jdbcType=VARCHAR},
+      </if>
+      <if test="driverFree != null" >
+        Driver_free = #{driverFree,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Driver_ID = #{driverId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Driver" >
+    update driver
+    set Driver_name = #{driverName,jdbcType=VARCHAR},
+      Driver_Age = #{driverAge,jdbcType=INTEGER},
+      Driver_Driverslicense = #{driverDriverslicense,jdbcType=VARCHAR},
+      Driver_Drivingage = #{driverDrivingage,jdbcType=INTEGER},
+      Driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      Driver_Licenseplate = #{driverLicenseplate,jdbcType=VARCHAR},
+      Driver_free = #{driverFree,jdbcType=INTEGER}
+    where Driver_ID = #{driverId,jdbcType=INTEGER}
+  </update>
+</mapper>

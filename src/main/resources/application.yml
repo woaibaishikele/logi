@@ -1,0 +1,30 @@
+logging:
+  pattern:
+    console: "%d - %msg%n"
+  path: /var/log/tomcat/
+  file: /var/log/tomcat/sell.log
+  level:
+    com.imooc.LoggerTest: debug
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/appinfodb?characterEncoding=utf-8&useSSL=false
+    jpa:
+      show-sql: true
+server:
+  context-path: /sell
+
+
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql1234567891011121314151617181920212223242526272829
+mybatis-plus:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.model
+

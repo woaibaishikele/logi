@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.FinanceMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Finance" >
+    <id column="Finance_no" property="financeNo" jdbcType="VARCHAR" />
+    <result column="Finance_ Auditing" property="financeAuditing" jdbcType="INTEGER" />
+    <result column="Finance_CreateDate" property="financeCreatedate" jdbcType="TIMESTAMP" />
+    <result column="Finance_paytime" property="financePaytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Finance_no, "Finance_ Auditing", Finance_CreateDate, Finance_paytime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from finance
+    where Finance_no = #{financeNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from finance
+    where Finance_no = #{financeNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Finance" >
+    insert into finance (Finance_no, "Finance_ Auditing", Finance_CreateDate, 
+      Finance_paytime)
+    values (#{financeNo,jdbcType=VARCHAR}, #{financeAuditing,jdbcType=INTEGER}, #{financeCreatedate,jdbcType=TIMESTAMP}, 
+      #{financePaytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Finance" >
+    insert into finance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="financeNo != null" >
+        Finance_no,
+      </if>
+      <if test="financeAuditing != null" >
+        "Finance_ Auditing",
+      </if>
+      <if test="financeCreatedate != null" >
+        Finance_CreateDate,
+      </if>
+      <if test="financePaytime != null" >
+        Finance_paytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="financeNo != null" >
+        #{financeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="financeAuditing != null" >
+        #{financeAuditing,jdbcType=INTEGER},
+      </if>
+      <if test="financeCreatedate != null" >
+        #{financeCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financePaytime != null" >
+        #{financePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Finance" >
+    update finance
+    <set >
+      <if test="financeAuditing != null" >
+        "Finance_ Auditing" = #{financeAuditing,jdbcType=INTEGER},
+      </if>
+      <if test="financeCreatedate != null" >
+        Finance_CreateDate = #{financeCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financePaytime != null" >
+        Finance_paytime = #{financePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Finance_no = #{financeNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Finance" >
+    update finance
+    set "Finance_ Auditing" = #{financeAuditing,jdbcType=INTEGER},
+      Finance_CreateDate = #{financeCreatedate,jdbcType=TIMESTAMP},
+      Finance_paytime = #{financePaytime,jdbcType=TIMESTAMP}
+    where Finance_no = #{financeNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

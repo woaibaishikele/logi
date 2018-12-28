@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.StateMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.State" >
+    <id column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_state_name" property="orderStateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_state, order_state_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from state
+    where order_state = #{orderState,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from state
+    where order_state = #{orderState,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.State" >
+    insert into state (order_state, order_state_name)
+    values (#{orderState,jdbcType=INTEGER}, #{orderStateName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.State" >
+    insert into state
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="orderStateName != null" >
+        order_state_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderStateName != null" >
+        #{orderStateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.State" >
+    update state
+    <set >
+      <if test="orderStateName != null" >
+        order_state_name = #{orderStateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_state = #{orderState,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.State" >
+    update state
+    set order_state_name = #{orderStateName,jdbcType=VARCHAR}
+    where order_state = #{orderState,jdbcType=INTEGER}
+  </update>
+</mapper>

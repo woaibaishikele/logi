@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.TravelMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Travel" >
+    <id column="Travels_no" property="travelsNo" jdbcType="VARCHAR" />
+    <result column="Travel_CreateDate" property="travelCreatedate" jdbcType="TIMESTAMP" />
+    <result column="Travel_paytime" property="travelPaytime" jdbcType="TIMESTAMP" />
+    <result column="Driver_name" property="driverName" jdbcType="VARCHAR" />
+    <result column="Driver_Licenseplate" property="driverLicenseplate" jdbcType="VARCHAR" />
+    <result column="Driver_free" property="driverFree" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Travels_no, Travel_CreateDate, Travel_paytime, Driver_name, Driver_Licenseplate, 
+    Driver_free
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from travel
+    where Travels_no = #{travelsNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from travel
+    where Travels_no = #{travelsNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Travel" >
+    insert into travel (Travels_no, Travel_CreateDate, Travel_paytime, 
+      Driver_name, Driver_Licenseplate, Driver_free
+      )
+    values (#{travelsNo,jdbcType=VARCHAR}, #{travelCreatedate,jdbcType=TIMESTAMP}, #{travelPaytime,jdbcType=TIMESTAMP}, 
+      #{driverName,jdbcType=VARCHAR}, #{driverLicenseplate,jdbcType=VARCHAR}, #{driverFree,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Travel" >
+    insert into travel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="travelsNo != null" >
+        Travels_no,
+      </if>
+      <if test="travelCreatedate != null" >
+        Travel_CreateDate,
+      </if>
+      <if test="travelPaytime != null" >
+        Travel_paytime,
+      </if>
+      <if test="driverName != null" >
+        Driver_name,
+      </if>
+      <if test="driverLicenseplate != null" >
+        Driver_Licenseplate,
+      </if>
+      <if test="driverFree != null" >
+        Driver_free,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="travelsNo != null" >
+        #{travelsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="travelCreatedate != null" >
+        #{travelCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="travelPaytime != null" >
+        #{travelPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseplate != null" >
+        #{driverLicenseplate,jdbcType=VARCHAR},
+      </if>
+      <if test="driverFree != null" >
+        #{driverFree,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Travel" >
+    update travel
+    <set >
+      <if test="travelCreatedate != null" >
+        Travel_CreateDate = #{travelCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="travelPaytime != null" >
+        Travel_paytime = #{travelPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="driverName != null" >
+        Driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseplate != null" >
+        Driver_Licenseplate = #{driverLicenseplate,jdbcType=VARCHAR},
+      </if>
+      <if test="driverFree != null" >
+        Driver_free = #{driverFree,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Travels_no = #{travelsNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Travel" >
+    update travel
+    set Travel_CreateDate = #{travelCreatedate,jdbcType=TIMESTAMP},
+      Travel_paytime = #{travelPaytime,jdbcType=TIMESTAMP},
+      Driver_name = #{driverName,jdbcType=VARCHAR},
+      Driver_Licenseplate = #{driverLicenseplate,jdbcType=VARCHAR},
+      Driver_free = #{driverFree,jdbcType=INTEGER}
+    where Travels_no = #{travelsNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.WarehousesMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Warehouses" >
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="Warehouses_Cargonumber" property="warehousesCargonumber" jdbcType="VARCHAR" />
+    <result column="Warehouses_type" property="warehousesType" jdbcType="VARCHAR" />
+    <result column="Warehouses_types" property="warehousesTypes" jdbcType="VARCHAR" />
+    <result column="Warehouses_name" property="warehousesName" jdbcType="VARCHAR" />
+    <result column="Warehouses_sun" property="warehousesSun" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_no, Warehouses_Cargonumber, Warehouses_type, Warehouses_types, Warehouses_name, 
+    Warehouses_sun
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from warehouses
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from warehouses
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Warehouses" >
+    insert into warehouses (order_no, Warehouses_Cargonumber, Warehouses_type, 
+      Warehouses_types, Warehouses_name, Warehouses_sun
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{warehousesCargonumber,jdbcType=VARCHAR}, #{warehousesType,jdbcType=VARCHAR}, 
+      #{warehousesTypes,jdbcType=VARCHAR}, #{warehousesName,jdbcType=VARCHAR}, #{warehousesSun,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Warehouses" >
+    insert into warehouses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="warehousesCargonumber != null" >
+        Warehouses_Cargonumber,
+      </if>
+      <if test="warehousesType != null" >
+        Warehouses_type,
+      </if>
+      <if test="warehousesTypes != null" >
+        Warehouses_types,
+      </if>
+      <if test="warehousesName != null" >
+        Warehouses_name,
+      </if>
+      <if test="warehousesSun != null" >
+        Warehouses_sun,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesCargonumber != null" >
+        #{warehousesCargonumber,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesType != null" >
+        #{warehousesType,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesTypes != null" >
+        #{warehousesTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesName != null" >
+        #{warehousesName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesSun != null" >
+        #{warehousesSun,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Warehouses" >
+    update warehouses
+    <set >
+      <if test="warehousesCargonumber != null" >
+        Warehouses_Cargonumber = #{warehousesCargonumber,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesType != null" >
+        Warehouses_type = #{warehousesType,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesTypes != null" >
+        Warehouses_types = #{warehousesTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesName != null" >
+        Warehouses_name = #{warehousesName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousesSun != null" >
+        Warehouses_sun = #{warehousesSun,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Warehouses" >
+    update warehouses
+    set Warehouses_Cargonumber = #{warehousesCargonumber,jdbcType=VARCHAR},
+      Warehouses_type = #{warehousesType,jdbcType=VARCHAR},
+      Warehouses_types = #{warehousesTypes,jdbcType=VARCHAR},
+      Warehouses_name = #{warehousesName,jdbcType=VARCHAR},
+      Warehouses_sun = #{warehousesSun,jdbcType=VARCHAR}
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

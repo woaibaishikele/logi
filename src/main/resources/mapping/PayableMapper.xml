@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.PayableMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Payable" >
+    <id column="payable_user" property="payableUser" jdbcType="VARCHAR" />
+    <result column="payable_phone" property="payablePhone" jdbcType="VARCHAR" />
+    <result column="bill_id" property="billId" jdbcType="INTEGER" />
+    <result column="payable_CreateDate" property="payableCreatedate" jdbcType="TIMESTAMP" />
+    <result column="payable_paytime" property="payablePaytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    payable_user, payable_phone, bill_id, payable_CreateDate, payable_paytime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from payable
+    where payable_user = #{payableUser,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from payable
+    where payable_user = #{payableUser,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Payable" >
+    insert into payable (payable_user, payable_phone, bill_id, 
+      payable_CreateDate, payable_paytime)
+    values (#{payableUser,jdbcType=VARCHAR}, #{payablePhone,jdbcType=VARCHAR}, #{billId,jdbcType=INTEGER}, 
+      #{payableCreatedate,jdbcType=TIMESTAMP}, #{payablePaytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Payable" >
+    insert into payable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payableUser != null" >
+        payable_user,
+      </if>
+      <if test="payablePhone != null" >
+        payable_phone,
+      </if>
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="payableCreatedate != null" >
+        payable_CreateDate,
+      </if>
+      <if test="payablePaytime != null" >
+        payable_paytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payableUser != null" >
+        #{payableUser,jdbcType=VARCHAR},
+      </if>
+      <if test="payablePhone != null" >
+        #{payablePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null" >
+        #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="payableCreatedate != null" >
+        #{payableCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payablePaytime != null" >
+        #{payablePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Payable" >
+    update payable
+    <set >
+      <if test="payablePhone != null" >
+        payable_phone = #{payablePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null" >
+        bill_id = #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="payableCreatedate != null" >
+        payable_CreateDate = #{payableCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payablePaytime != null" >
+        payable_paytime = #{payablePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where payable_user = #{payableUser,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Payable" >
+    update payable
+    set payable_phone = #{payablePhone,jdbcType=VARCHAR},
+      bill_id = #{billId,jdbcType=INTEGER},
+      payable_CreateDate = #{payableCreatedate,jdbcType=TIMESTAMP},
+      payable_paytime = #{payablePaytime,jdbcType=TIMESTAMP}
+    where payable_user = #{payableUser,jdbcType=VARCHAR}
+  </update>
+</mapper>

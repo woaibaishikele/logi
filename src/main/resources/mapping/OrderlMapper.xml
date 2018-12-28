@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.OrderlMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Orderl" >
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="dorder_no" property="dorderNo" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="oorder_CreateDate" property="oorderCreatedate" jdbcType="TIMESTAMP" />
+    <result column="order_paytime" property="orderPaytime" jdbcType="TIMESTAMP" />
+    <result column="order_DeliveryTime" property="orderDeliverytime" jdbcType="TIMESTAMP" />
+    <result column="order_Notes" property="orderNotes" jdbcType="VARCHAR" />
+    <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+    <result column="Logisticsprice_tprice" property="logisticspriceTprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_no, dorder_no, order_state, oorder_CreateDate, order_paytime, order_DeliveryTime, 
+    order_Notes, reject_reason, Logisticsprice_tprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderl
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orderl
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Orderl" >
+    insert into orderl (order_no, dorder_no, order_state, 
+      oorder_CreateDate, order_paytime, order_DeliveryTime, 
+      order_Notes, reject_reason, Logisticsprice_tprice
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{dorderNo,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
+      #{oorderCreatedate,jdbcType=TIMESTAMP}, #{orderPaytime,jdbcType=TIMESTAMP}, #{orderDeliverytime,jdbcType=TIMESTAMP}, 
+      #{orderNotes,jdbcType=VARCHAR}, #{rejectReason,jdbcType=VARCHAR}, #{logisticspriceTprice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Orderl" >
+    insert into orderl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="dorderNo != null" >
+        dorder_no,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="oorderCreatedate != null" >
+        oorder_CreateDate,
+      </if>
+      <if test="orderPaytime != null" >
+        order_paytime,
+      </if>
+      <if test="orderDeliverytime != null" >
+        order_DeliveryTime,
+      </if>
+      <if test="orderNotes != null" >
+        order_Notes,
+      </if>
+      <if test="rejectReason != null" >
+        reject_reason,
+      </if>
+      <if test="logisticspriceTprice != null" >
+        Logisticsprice_tprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dorderNo != null" >
+        #{dorderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="oorderCreatedate != null" >
+        #{oorderCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaytime != null" >
+        #{orderPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderDeliverytime != null" >
+        #{orderDeliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNotes != null" >
+        #{orderNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectReason != null" >
+        #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticspriceTprice != null" >
+        #{logisticspriceTprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Orderl" >
+    update orderl
+    <set >
+      <if test="dorderNo != null" >
+        dorder_no = #{dorderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="oorderCreatedate != null" >
+        oorder_CreateDate = #{oorderCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaytime != null" >
+        order_paytime = #{orderPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderDeliverytime != null" >
+        order_DeliveryTime = #{orderDeliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNotes != null" >
+        order_Notes = #{orderNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectReason != null" >
+        reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticspriceTprice != null" >
+        Logisticsprice_tprice = #{logisticspriceTprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Orderl" >
+    update orderl
+    set dorder_no = #{dorderNo,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=INTEGER},
+      oorder_CreateDate = #{oorderCreatedate,jdbcType=TIMESTAMP},
+      order_paytime = #{orderPaytime,jdbcType=TIMESTAMP},
+      order_DeliveryTime = #{orderDeliverytime,jdbcType=TIMESTAMP},
+      order_Notes = #{orderNotes,jdbcType=VARCHAR},
+      reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      Logisticsprice_tprice = #{logisticspriceTprice,jdbcType=DECIMAL}
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

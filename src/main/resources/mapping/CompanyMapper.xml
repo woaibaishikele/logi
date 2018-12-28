@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Company" >
+    <id column="company_month" property="companyMonth" jdbcType="VARCHAR" />
+    <result column="company_quarter" property="companyQuarter" jdbcType="VARCHAR" />
+    <result column="company_year" property="companyYear" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_month, company_quarter, company_year
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where company_month = #{companyMonth,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from company
+    where company_month = #{companyMonth,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Company" >
+    insert into company (company_month, company_quarter, company_year
+      )
+    values (#{companyMonth,jdbcType=VARCHAR}, #{companyQuarter,jdbcType=VARCHAR}, #{companyYear,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Company" >
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyMonth != null" >
+        company_month,
+      </if>
+      <if test="companyQuarter != null" >
+        company_quarter,
+      </if>
+      <if test="companyYear != null" >
+        company_year,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyMonth != null" >
+        #{companyMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyQuarter != null" >
+        #{companyQuarter,jdbcType=VARCHAR},
+      </if>
+      <if test="companyYear != null" >
+        #{companyYear,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Company" >
+    update company
+    <set >
+      <if test="companyQuarter != null" >
+        company_quarter = #{companyQuarter,jdbcType=VARCHAR},
+      </if>
+      <if test="companyYear != null" >
+        company_year = #{companyYear,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_month = #{companyMonth,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Company" >
+    update company
+    set company_quarter = #{companyQuarter,jdbcType=VARCHAR},
+      company_year = #{companyYear,jdbcType=VARCHAR}
+    where company_month = #{companyMonth,jdbcType=VARCHAR}
+  </update>
+</mapper>

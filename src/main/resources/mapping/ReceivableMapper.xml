@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ReceivableMapper" >
+  <resultMap id="BaseResultMap" type="com.example.model.Receivable" >
+    <id column="bill_id" property="billId" jdbcType="INTEGER" />
+    <result column="receivable_company" property="receivableCompany" jdbcType="VARCHAR" />
+    <result column="receivable_CreateDate" property="receivableCreatedate" jdbcType="TIMESTAMP" />
+    <result column="receivable_paytime" property="receivablePaytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bill_id, receivable_company, receivable_CreateDate, receivable_paytime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from receivable
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from receivable
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Receivable" >
+    insert into receivable (bill_id, receivable_company, receivable_CreateDate, 
+      receivable_paytime)
+    values (#{billId,jdbcType=INTEGER}, #{receivableCompany,jdbcType=VARCHAR}, #{receivableCreatedate,jdbcType=TIMESTAMP}, 
+      #{receivablePaytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Receivable" >
+    insert into receivable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="receivableCompany != null" >
+        receivable_company,
+      </if>
+      <if test="receivableCreatedate != null" >
+        receivable_CreateDate,
+      </if>
+      <if test="receivablePaytime != null" >
+        receivable_paytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="receivableCompany != null" >
+        #{receivableCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="receivableCreatedate != null" >
+        #{receivableCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivablePaytime != null" >
+        #{receivablePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Receivable" >
+    update receivable
+    <set >
+      <if test="receivableCompany != null" >
+        receivable_company = #{receivableCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="receivableCreatedate != null" >
+        receivable_CreateDate = #{receivableCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivablePaytime != null" >
+        receivable_paytime = #{receivablePaytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Receivable" >
+    update receivable
+    set receivable_company = #{receivableCompany,jdbcType=VARCHAR},
+      receivable_CreateDate = #{receivableCreatedate,jdbcType=TIMESTAMP},
+      receivable_paytime = #{receivablePaytime,jdbcType=TIMESTAMP}
+    where bill_id = #{billId,jdbcType=INTEGER}
+  </update>
+</mapper>
